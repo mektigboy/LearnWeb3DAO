@@ -62,7 +62,6 @@ export default function Home() {
       );
       const _numberOfWhitelisted =
         await whitelistContract.numAddressesWhitelisted();
-
       setNumberOfWhitelisted(_numberOfWhitelisted);
     } catch (error) {
       console.error(error);
@@ -147,7 +146,7 @@ export default function Home() {
         <div>
           <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
           <div className={styles.description}>
-            It's an NFT collection for developers in crypto.
+            Its an NFT collection for developers in crypto.
           </div>
           <div className={styles.description}>
             {numberOfWhitelisted} have already joined the whitelist.
