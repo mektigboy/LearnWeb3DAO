@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Web3Modal from "web3modal";
-import styles from "../styles/Home.module.css";
 import { abi, NFT_CONTRACT_ADDRESS } from "../constants";
 import { Contract, providers, utils } from "ethers";
 import { useEffect, useRef, useState } from "react";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -18,7 +18,11 @@ export default function Home() {
   const presaleMint = async () => {
     try {
       const signer = await getProviderOrSigner(true);
-      const whitelistContract = new Contract(NFT_CONTRACT_ADDRESS, abi, signer);
+      const whitelistContract = new Contract(
+        NFT_CONTRACT_ADDRESS,
+        abi,
+        signer
+      );
       const tx = await whitelistContract.presaleMint({
         value: utils.parseEther("0.01"),
       });
@@ -35,7 +39,11 @@ export default function Home() {
   const publicMint = async () => {
     try {
       const signer = await getProviderOrSigner(true);
-      const whitelistContract = new Contract(NFT_CONTRACT_ADDRESS, abi, signer);
+      const whitelistContract = new Contract(
+        NFT_CONTRACT_ADDRESS,
+        abi,
+        signer
+      );
       const tx = await whitelistContract.mint({
         value: utils.parseEther("0.01"),
       });
@@ -61,7 +69,11 @@ export default function Home() {
   const startPresale = async () => {
     try {
       const signer = await getProviderOrSigner(true);
-      const whitelistContract = new Contract(NFT_CONTRACT_ADDRESS, abi, signer);
+      const whitelistContract = new Contract(
+        NFT_CONTRACT_ADDRESS,
+        abi,
+        signer
+      );
       const tx = await whitelistContract.startPresale();
 
       setLoading(true);
@@ -78,6 +90,7 @@ export default function Home() {
       const provider = await getProviderOrSigner();
       const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
       const _presaleStarted = await nftContract.presaleStarted();
+
       if (!_presaleStarted) {
         await getOwner();
       }
@@ -121,6 +134,7 @@ export default function Home() {
       if (address.toLowerCase() === _owner.toLowerCase()) {
         setIsOwner(true);
       }
+
     } catch (error) {
       console.error(error.message);
     }
@@ -153,7 +167,6 @@ export default function Home() {
       const signer = web3Provider.getSigner();
       return signer;
     }
-
     return web3Provider;
   };
 
@@ -164,12 +177,17 @@ export default function Home() {
         providerOptions: {},
         disableInjectedProvider: false,
       });
+
       connectWallet();
+
       const _presaleStarted = checkIfPresaleStarted();
+
       if (_presaleStarted) {
         checkIfPresaleEnded();
       }
+
       getTokenIdsMinted();
+
       const presaleEndedInterval = setInterval(async function () {
         const _presaleStarted = await checkIfPresaleStarted();
         if (_presaleStarted) {
@@ -179,6 +197,7 @@ export default function Home() {
           }
         }
       }, 5 * 1000);
+
       setInterval(async function () {
         await getTokenIdsMinted();
       }, 5 * 1000);
@@ -218,8 +237,8 @@ export default function Home() {
       return (
         <div>
           <div className={styles.description}>
-            Presale has started! If your address is whitelisted, mint a Crypto
-            Dev.
+            Presale has started! If your address is whitelisted, mint a
+            Crypto Dev.
           </div>
           <button className={styles.button} onClick={presaleMint}>
             Presale Mint
@@ -248,7 +267,7 @@ export default function Home() {
         <div>
           <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
           <div className={styles.description}>
-            It's an NFT collection for developers in crypto.
+            Its an NFT collection for developers in crypto.
           </div>
           <div className={styles.description}>
             {tokenIdsMinted}/20 have been minted.
