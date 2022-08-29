@@ -119,7 +119,7 @@ export default function Home() {
     } else {
       return (
         <button onClick={connectWallet} className={styles.button}>
-          Connect your wallet
+          Connect Wallet
         </button>
       );
     }
@@ -140,14 +140,14 @@ export default function Home() {
     <div>
       <Head>
         <title>Whitelist</title>
-        <meta name="description" content="Whitelist-Dapp" />
+        <meta name="description" content="Whitelist" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.main}>
         <div>
           <h1 className={styles.title}>Welcome to Crypto Devs!</h1>
           <div className={styles.description}>
-            It's an NFT collection for developers in Crypto.
+            It's an NFT collection for developers in crypto.
           </div>
           <div className={styles.description}>
             {numberOfWhitelisted} have already joined the whitelist.
